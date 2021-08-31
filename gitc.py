@@ -13,6 +13,8 @@ def getResults(filters):
 
 	filteredResults = []
 	for result in results:
+		if result == '':
+			continue
 		matches_filter = True
 		for filter in filters:
 			matches_filter &= filter in result
@@ -28,7 +30,7 @@ if (len(sys.argv) > 1):
 user_input = filters
 
 results = []
-while user_input[0] == '' or (len(user_input) != 1 and user_input[0] != "!q" and user_input[0] != "!Q" and (len(user_input[0]) < 1) or (len(user_input[0]) > 0 and user_input[0][-1] != "!")):
+while (user_input[0] == '' and len(results) != 1) or (len(user_input) != 1 and user_input[0] != "!q" and user_input[0] != "!Q" and (len(user_input[0]) < 1) or (len(user_input[0]) > 0 and user_input[0][-1] != "!")):
 	results = getResults(user_input)
 
 	if (len(results) == 0):
@@ -41,6 +43,9 @@ while user_input[0] == '' or (len(user_input) != 1 and user_input[0] != "!q" and
 
 if user_input[0] in ("q!", "Q!"):
 	exit (0)
+
+if user_input[0] == '':
+	user_input[0] = "0!"
 
 index = user_input[0][0 : -1]
 
