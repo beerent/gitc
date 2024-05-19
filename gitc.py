@@ -27,6 +27,12 @@ filters = ['']
 if (len(sys.argv) > 1):
 	filters = sys.argv[1:]
 
+# create new branch option
+if len(filters) == 2 and filters[0] == "-b":
+	subprocess.run(['git', 'checkout', '-b', filters[1]], stdout=subprocess.PIPE)
+	exit(0)
+
+# search branches
 user_input = filters
 
 results = []
